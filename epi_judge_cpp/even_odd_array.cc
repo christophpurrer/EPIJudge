@@ -1,15 +1,46 @@
 #include <set>
 #include <vector>
-
+#include <array>
 #include "test_framework/generic_test.h"
 #include "test_framework/test_failure.h"
 #include "test_framework/timed_executor.h"
 using std::vector;
 
-void EvenOdd(vector<int>* A_ptr) {
-  // TODO - you fill in here.
-  return;
+void EvenOdd1(vector<int> *A_ptr) {
+    auto l = 0;
+    auto r = A_ptr->size() - 1;
+    while (l < r) {
+        if (A_ptr->at(l) % 2 == 0) {
+            l++;
+        } else if (A_ptr->at(r) % 2 != 0) {
+            r--;
+        } else {
+            auto tmp = A_ptr->at(l);
+            A_ptr->at(l) = A_ptr->at(r);
+            A_ptr->at(r) = tmp;
+            l++;
+            r--;
+        }
+    }
+
+    std::array<int, 3> A {1,2,3};
+
 }
+
+void EvenOdd(vector<int> *A_ptr) {
+    vector<int>& A = *A_ptr;
+    int l = 0, r = A.size() - 1;
+    while (l < r) {
+        if (A[l] % 2 == 0) {
+            l++;
+        } else if (A[r] % 2 != 0) {
+            r--;
+        } else {
+            std::swap(A[l++], A[r--]);
+        }
+    }
+}
+
 void EvenOddWrapper(TimedExecutor& executor, vector<int> A) {
   std::multiset<int> before(begin(A), end(A));
 
