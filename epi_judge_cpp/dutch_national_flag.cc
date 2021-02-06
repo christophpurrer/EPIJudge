@@ -7,10 +7,76 @@
 using std::vector;
 enum class Color { kRed, kWhite, kBlue };
 
-void DutchFlagPartition(int pivot_index, vector<Color>* A_ptr) {
-  // TODO - you fill in here.
-  return;
+// First approach. O(1) space BUT O(n^2) time!!!
+void DutchFlagPartition1(int pivot_index, vector<Color> *A_ptr) {
+    vector<Color> &A = *A_ptr;
+    Color pivot = A[pivot_index];
+    // First pass: group elements smaller than the pivot
+    for (auto i = 0; i < A.size(); i++) {
+        for (auto j = i + 1; j < A.size(); j++) {
+            if (A[j] < pivot) {
+                std::swap(A[i], A[j]);
+                break;
+            }
+        }
+    }
+    // Second pass: group elements larger than the pivot
+    for (auto i = A.size() - 1; i >= 0 && A[i] >= pivot; i--) {
+        // Look for larger element. Stop when we reached an element less than the pivot
+        // First pass has already handled that
+        for (auto j = i - 1; j >= 0 && A[j] >= pivot; --j) {
+            if (A[j] > pivot) {
+                std::swap(A[i], A[j]);
+                break;
+            }
+        }
+    }
+    return;
 }
+
+// Second approach. O(1) space and O(n) time
+void DutchFlagPartition2(int pivot_index, vector<Color> *A_ptr) {
+    vector<Color> &A = *A_ptr;
+    Color pivot = A[pivot_index];
+    // First pass: group elements smaller than the pivot
+    auto smaller = 0;
+    for (auto i = 1; i < A.size(); i++) {
+        if (A[i] < pivot) {
+            std::swap(A[i], A[smaller++]);
+        }
+    }
+    // Second pass: group elements larger than the pivot
+    auto larger = A.size() - 1;
+    for (auto i = A.size() - 2; i >= 0 && A[i] >= pivot; i--) {
+        if (A[i] > pivot) {
+            std::swap(A[i], A[larger--]);
+        }
+    }
+}
+
+void DutchFlagPartition(int pivot_index, vector<Color> *A_ptr) {
+    vector<Color> &A = *A_ptr;
+    Color pivot = A[pivot_index];
+    /*
+     * Keep the following invariants during partitioning
+     * bottom group A[0 : smaller - 1]
+     * middle group A[smaller : equal - 1]
+     * unclassified group A[equal : larger - 1]
+     * top group A[larger : A.size() - 1]
+     */
+    int smaller = 0, equal = 0, larger = A.size();
+    while (equal < larger) {
+        // A[equal] is the ine incoming unclassified element
+        if (A[equal] < pivot) {
+            std::swap(A[smaller++], A[equal++]);
+        } else if (A[equal] == pivot) {
+            equal++;
+        } else { // A[equal] > pivot
+            std::swap(A[equal], A[--larger]);
+        }
+    }
+}
+
 void DutchFlagPartitionWrapper(TimedExecutor& executor, const vector<int>& A,
                                int pivot_idx) {
   vector<Color> colors;

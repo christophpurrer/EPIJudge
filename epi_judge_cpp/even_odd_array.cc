@@ -22,9 +22,6 @@ void EvenOdd1(vector<int> *A_ptr) {
             r--;
         }
     }
-
-    std::array<int, 3> A {1,2,3};
-
 }
 
 void EvenOdd(vector<int> *A_ptr) {
@@ -39,6 +36,18 @@ void EvenOdd(vector<int> *A_ptr) {
             std::swap(A[l++], A[r--]);
         }
     }
+
+    // Test std::vector / std::array
+    std::array<int, 3> B{1, 2, 3};
+    std::vector<int> subB(B.begin(), B.end() - 2);
+    std::array<std::array<int, 2>, 3> D{{
+                                                {{1, 2}},
+                                                {{3, 4}},
+                                                {{5, 6}}
+                                        }};
+    std::vector<std::vector<int>> E = {{1, 2},
+                                       {3, 4},
+                                       {5, 6}};
 }
 
 void EvenOddWrapper(TimedExecutor& executor, vector<int> A) {

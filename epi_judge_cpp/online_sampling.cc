@@ -13,7 +13,11 @@ using std::vector;
 vector<int> OnlineRandomSample(vector<int>::const_iterator stream_begin,
                                const vector<int>::const_iterator stream_end,
                                int k) {
-  // TODO - you fill in here.
+  int x;
+  vector<int> running_sample;
+  for(int i =0; i< k && *sin >> x; i++) {
+
+  }
   return {};
 }
 bool OnlineRandomSamplingRunner(TimedExecutor& executor, vector<int> stream,

@@ -4,14 +4,40 @@
 #include "test_framework/test_failure.h"
 using std::string;
 
-string IntToString(int x) {
-  // TODO - you fill in here.
-  return "0";
+std::string IntToString(int x) {
+    const bool is_negative = x < 0; // get sign
+    std::string s;
+    do {
+        s += '0' + std::abs(x % 10); // avoid int overflow
+        x /= 10;
+    } while (x);
+    if (is_negative) {
+        s += '-';
+    }
+    return {s.rbegin(), s.rend()}; // reverse string
 }
-int StringToInt(const string& s) {
-  // TODO - you fill in here.
-  return 0;
+
+int StringToInt(const string &s) {
+    int sign = s.size() > 0 && s[0] == '-' ? -1 : 1;
+    int i = sign < 0 || s[0] == '+' ? 1 : 0;
+    int result = 0;
+    while (i < s.size()) {
+        result *= 10;
+        result += s[i] - '0';
+        i++;
+    }
+    return result * sign;
 }
+
+bool isPalindromic(const std::string &s) {
+    for (int i = 0, j = s.size() - 1; i < s.size() - 1, i < j; i++, j--) {
+        if (s[i] != s[j]) {
+            return false;
+        }
+    }
+    return true;
+}
+
 void Wrapper(int x, const string& s) {
   if (stoi(IntToString(x)) != x) {
     throw TestFailure("Int to string conversion failed");

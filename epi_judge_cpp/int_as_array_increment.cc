@@ -1,10 +1,25 @@
 #include <vector>
 
 #include "test_framework/generic_test.h"
+
 using std::vector;
+
 vector<int> PlusOne(vector<int> A) {
-  // TODO - you fill in here.
-  return {};
+    // PlusOne on last digit
+    A[A.size() - 1]++; // ++ A.back();
+
+    // Process other digits
+    for (auto i = A.size() - 1; i > 0 && A[i] == 10; i--) {
+        A[i] = 0;
+        A[i - 1]++;
+    }
+
+    // Need additional digit?
+    if (A[0] == 10) {
+        A[0] = 0;
+        A.insert(A.begin(), 1);
+    }
+    return A;
 }
 
 int main(int argc, char* argv[]) {

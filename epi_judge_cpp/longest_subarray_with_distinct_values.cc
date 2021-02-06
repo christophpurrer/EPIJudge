@@ -3,9 +3,18 @@
 #include "test_framework/generic_test.h"
 using std::vector;
 
-int LongestSubarrayWithDistinctEntries(const vector<int>& A) {
-  // TODO - you fill in here.
-  return 0;
+int LongestSubarrayWithDistinctEntries(const vector<int> &A) {
+    int maxSubArray = 1;
+    int curSubArray = 1;
+    for (int i = 1; i < A.size(); i++) {
+        if (A[i] == A[i - 1]) {
+            curSubArray++;
+            maxSubArray = std::max(maxSubArray, curSubArray);
+        } else {
+            curSubArray = 1;
+        }
+    }
+    return maxSubArray;
 }
 
 int main(int argc, char* argv[]) {
