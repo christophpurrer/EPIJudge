@@ -3,8 +3,23 @@
 
 shared_ptr<ListNode<int>> AddTwoNumbers(shared_ptr<ListNode<int>> L1,
                                         shared_ptr<ListNode<int>> L2) {
-  // TODO - you fill in here.
-  return nullptr;
+    auto dummy_head = make_shared<ListNode<int>>();
+    auto node = dummy_head;
+    int reminder = 0;
+    while (L1 || L2 || reminder) {
+        if (L1) {
+            reminder += L1->data;
+            L1 = L1->next;
+        }
+        if (L2) {
+            reminder += L2->data;
+            L2 = L2->next;
+        }
+        node->next = make_shared<ListNode<int>>(reminder % 10);
+        node = node->next;
+        reminder /= 10;
+    }
+    return dummy_head->next;
 }
 
 int main(int argc, char* argv[]) {

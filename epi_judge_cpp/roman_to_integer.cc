@@ -2,9 +2,27 @@
 
 #include "test_framework/generic_test.h"
 using std::string;
-int RomanToInteger(const string& s) {
-  // TODO - you fill in here.
-  return 0;
+
+int RomanToInteger(const string &s) {
+    std::map<char, int> T = {
+            {'I', 1},
+            {'V', 5},
+            {'X', 10},
+            {'L', 50},
+            {'C', 100},
+            {'D', 500},
+            {'M', 1000},
+    };
+
+    int result = T[s.back()];
+    for (int i = s.size() - 2; i >= 0; i--) {
+        if (T[s[i]] < T[s[i + 1]]) {
+            result -= T[s[i]];
+        } else {
+            result += T[s[i]];
+        }
+    }
+    return result;
 }
 
 int main(int argc, char* argv[]) {

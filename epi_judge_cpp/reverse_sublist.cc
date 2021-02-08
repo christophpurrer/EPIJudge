@@ -3,8 +3,22 @@
 
 shared_ptr<ListNode<int>> ReverseSublist(shared_ptr<ListNode<int>> L, int start,
                                          int finish) {
-  // TODO - you fill in here.
-  return nullptr;
+    if (start == finish) return L;
+
+    auto dummy_head = std::make_shared<ListNode<int>>(ListNode<int>{0, L});
+    auto prevNode = dummy_head;
+    for (int i = 1; i < start; i++) {
+        prevNode = prevNode->next;
+    }
+
+    auto curNode = prevNode->next;
+    while (start < finish) {
+        auto temp = curNode->next;
+        curNode->next = temp->next;
+        temp->next = prevNode->next;
+        prevNode->next = temp;
+    }
+    return dummy_head->next;
 }
 
 int main(int argc, char* argv[]) {

@@ -6,8 +6,25 @@ using std::shared_ptr;
 
 shared_ptr<ListNode<int>> CyclicallyRightShiftList(shared_ptr<ListNode<int>> L,
                                                    int k) {
-  // TODO - you fill in here.
-  return nullptr;
+    if (k == 0) return L;
+
+    auto node = L;
+    shared_ptr<ListNode<int>> prev = nullptr;
+    while (k-- > 0) {
+        prev = node;
+        node = node->next;
+    }
+
+    auto result = node;
+    if (prev) {
+        prev->next = nullptr;
+    }
+
+    while (node->next) {
+        node = node->next;
+    }
+    node->next = L;
+    return result;
 }
 
 int main(int argc, char* argv[]) {

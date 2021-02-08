@@ -1,13 +1,23 @@
 #include <string>
-
+#include <sstream>
+#include <iostream>
 #include "test_framework/generic_test.h"
 #include "test_framework/timed_executor.h"
+
 using std::string;
 
-void ReverseWords(string* s) {
-  // TODO - you fill in here.
-  return;
+void ReverseWords(string *s) {
+    std::reverse(s->begin(), s->end());
+    int32_t start = 0, end = s->size();
+    while ((end = s->find(" ", start)) != string::npos) {
+        // Reverse each word
+        std::reverse(s->begin() + start, s->begin() + end);
+        start = end + 1;
+    }
+    // Reverse last word
+    std::reverse(s->begin() + start, s->end());
 }
+
 string ReverseWordsWrapper(TimedExecutor& executor, string s) {
   string s_copy = s;
 

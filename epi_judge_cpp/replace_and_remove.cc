@@ -8,8 +8,35 @@ using std::string;
 using std::vector;
 
 int ReplaceAndRemove(int size, char s[]) {
-  // TODO - you fill in here.
-  return 0;
+    // Forward > remove b's and count number of a's
+    int wIndex = 0, aCount = 0;
+    for (int i = 0; i < size; i++) {
+        if (s[i] != 'b') {
+            s[wIndex] = s[i];
+            wIndex++;
+        }
+        if (s[i] == 'a') {
+            aCount++;
+        }
+    }
+
+    // Backward: replace a's with dd's starting from end
+    int curIndex = wIndex - 1;
+    wIndex += aCount - 1;
+    const int finalSize = wIndex + 1;
+    while (curIndex >= 0) {
+        if (s[curIndex] == 'a') {
+            s[wIndex] = 'd';
+            wIndex--;
+            s[wIndex] = 'd';
+            wIndex--;
+        } else {
+            s[wIndex] = s[curIndex];
+            wIndex--;
+        }
+        curIndex--;
+    }
+    return finalSize;
 }
 vector<string> ReplaceAndRemoveWrapper(TimedExecutor& executor, int size,
                                        const vector<string>& s) {

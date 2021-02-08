@@ -468,7 +468,7 @@ problem_mapping = {
     "Chapter 06: Strings": {
         "6.00 Bootcamp: Strings": {
             "C++: is_string_palindromic.cc": {
-                "passed": 0,
+                "passed": 10000,
                 "total": 10000
             },
             "Java: IsStringPalindromic.java": {
@@ -496,7 +496,7 @@ problem_mapping = {
         },
         "6.02 Base conversion": {
             "C++: convert_base.cc": {
-                "passed": 0,
+                "passed": 20001,
                 "total": 20001
             },
             "Java: ConvertBase.java": {
@@ -510,7 +510,7 @@ problem_mapping = {
         },
         "6.03 Compute the spreadsheet column encoding": {
             "C++: spreadsheet_encoding.cc": {
-                "passed": 0,
+                "passed": 10000,
                 "total": 10000
             },
             "Java: SpreadsheetEncoding.java": {
@@ -524,7 +524,7 @@ problem_mapping = {
         },
         "6.04 Replace and remove": {
             "C++: replace_and_remove.cc": {
-                "passed": 0,
+                "passed": 501,
                 "total": 501
             },
             "Java: ReplaceAndRemove.java": {
@@ -552,7 +552,7 @@ problem_mapping = {
         },
         "6.06 Reverse all the words in a sentence": {
             "C++: reverse_words.cc": {
-                "passed": 0,
+                "passed": 103,
                 "total": 103
             },
             "Java: ReverseWords.java": {
@@ -566,7 +566,7 @@ problem_mapping = {
         },
         "6.07 The look-and-say problem": {
             "C++: look_and_say.cc": {
-                "passed": 0,
+                "passed": 40,
                 "total": 40
             },
             "Java: LookAndSay.java": {
@@ -580,7 +580,7 @@ problem_mapping = {
         },
         "6.08 Convert from Roman to decimal": {
             "C++: roman_to_integer.cc": {
-                "passed": 0,
+                "passed": 3999,
                 "total": 3999
             },
             "Java: RomanToInteger.java": {
@@ -594,7 +594,7 @@ problem_mapping = {
         },
         "6.09 Compute all valid IP addresses": {
             "C++: valid_ip_addresses.cc": {
-                "passed": 0,
+                "passed": 10008,
                 "total": 10008
             },
             "Java: ValidIpAddresses.java": {
@@ -608,7 +608,7 @@ problem_mapping = {
         },
         "6.10 Write a string sinusoidally": {
             "C++: snake_string.cc": {
-                "passed": 0,
+                "passed": 500,
                 "total": 500
             },
             "Java: SnakeString.java": {
@@ -622,7 +622,7 @@ problem_mapping = {
         },
         "6.11 Implement run-length encoding": {
             "C++: run_length_compression.cc": {
-                "passed": 0,
+                "passed": 200,
                 "total": 200
             },
             "Java: RunLengthCompression.java": {
@@ -636,7 +636,7 @@ problem_mapping = {
         },
         "6.12 Find the first occurrence of a substring": {
             "C++: substring_match.cc": {
-                "passed": 0,
+                "passed": 835,
                 "total": 835
             },
             "Java: SubstringMatch.java": {
@@ -652,7 +652,7 @@ problem_mapping = {
     "Chapter 07: Linked Lists": {
         "7.00 Bootcamp: Linked Lists": {
             "C++: delete_from_list.cc": {
-                "passed": 0,
+                "passed": 457,
                 "total": 457
             },
             "C++: insert_in_list.cc": {
@@ -690,7 +690,7 @@ problem_mapping = {
         },
         "7.01 Merge two sorted lists": {
             "C++: sorted_lists_merge.cc": {
-                "passed": 0,
+                "passed": 501,
                 "total": 501
             },
             "Java: SortedListsMerge.java": {
@@ -704,7 +704,7 @@ problem_mapping = {
         },
         "7.02 Reverse a single sublist": {
             "C++: reverse_sublist.cc": {
-                "passed": 0,
+                "passed": 2,
                 "total": 210
             },
             "Java: ReverseSublist.java": {
@@ -718,7 +718,7 @@ problem_mapping = {
         },
         "7.03 Test for cyclicity": {
             "C++: is_list_cyclic.cc": {
-                "passed": 0,
+                "passed": 102,
                 "total": 102
             },
             "Java: IsListCyclic.java": {
@@ -732,7 +732,7 @@ problem_mapping = {
         },
         "7.04 Test for overlapping lists---lists are cycle-free": {
             "C++: do_terminated_lists_overlap.cc": {
-                "passed": 0,
+                "passed": 106,
                 "total": 106
             },
             "Java: DoTerminatedListsOverlap.java": {
@@ -760,7 +760,7 @@ problem_mapping = {
         },
         "7.06 Delete a node from a singly linked list": {
             "C++: delete_node_from_list.cc": {
-                "passed": 0,
+                "passed": 512,
                 "total": 512
             },
             "Java: DeleteNodeFromList.java": {
@@ -788,7 +788,7 @@ problem_mapping = {
         },
         "7.08 Remove duplicates from a sorted list": {
             "C++: remove_duplicates_from_sorted_list.cc": {
-                "passed": 0,
+                "passed": 203,
                 "total": 203
             },
             "Java: RemoveDuplicatesFromSortedList.java": {
@@ -816,7 +816,7 @@ problem_mapping = {
         },
         "7.10 Implement even-odd merge": {
             "C++: even_odd_list_merge.cc": {
-                "passed": 0,
+                "passed": 1,
                 "total": 1015
             },
             "Java: EvenOddListMerge.java": {
@@ -844,7 +844,7 @@ problem_mapping = {
         },
         "7.12 Implement list pivoting": {
             "C++: pivot_list.cc": {
-                "passed": 0,
+                "passed": 208,
                 "total": 208
             },
             "Java: PivotList.java": {
@@ -858,7 +858,7 @@ problem_mapping = {
         },
         "7.13 Add list-based integers": {
             "C++: int_as_list_add.cc": {
-                "passed": 0,
+                "passed": 2002,
                 "total": 2002
             },
             "Java: IntAsListAdd.java": {
@@ -874,7 +874,7 @@ problem_mapping = {
     "Chapter 08: Stacks and Queues": {
         "8.01 Implement a stack with max API": {
             "C++: stack_with_max.cc": {
-                "passed": 0,
+                "passed": 101,
                 "total": 101
             },
             "Java: StackWithMax.java": {
@@ -888,7 +888,7 @@ problem_mapping = {
         },
         "8.02 Evaluate RPN expressions": {
             "C++: evaluate_rpn.cc": {
-                "passed": 0,
+                "passed": 108,
                 "total": 108
             },
             "Java: EvaluateRpn.java": {
@@ -1980,7 +1980,7 @@ problem_mapping = {
         },
         "15.02 Compute all mnemonics for a phone number": {
             "C++: phone_number_mnemonic.cc": {
-                "passed": 0,
+                "passed": 102,
                 "total": 102
             },
             "Java: PhoneNumberMnemonic.java": {

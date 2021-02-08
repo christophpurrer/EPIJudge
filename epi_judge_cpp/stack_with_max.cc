@@ -6,27 +6,41 @@
 using std::length_error;
 
 class Stack {
- public:
-  bool Empty() const {
-    // TODO - you fill in here.
-    return true;
-  }
-  int Max() const {
-    // TODO - you fill in here.
-    return 0;
-  }
-  int Pop() {
-    // TODO - you fill in here.
-    return 0;
-  }
-  void Push(int x) {
-    // TODO - you fill in here.
-    return;
-  }
+public:
+    bool Empty() const {
+        return stack.empty();
+    }
+
+    int Max() const {
+        if (Empty()) {
+            throw length_error("Max(): empty stack");
+        }
+        return stack.top().max;
+    }
+
+    int Pop() {
+        if (Empty()) {
+            throw length_error("Pop(): empty stack");
+        }
+        auto top = stack.top().element;
+        stack.pop();
+        return top;
+    }
+
+    void Push(int x) {
+        stack.emplace(ElementWithCachedMax{x, std::max(x, Empty() ? x : Max())});
+    }
+
+private:
+    struct ElementWithCachedMax {
+        int element, max;
+    };
+    std::stack<ElementWithCachedMax> stack;
 };
+
 struct StackOp {
-  std::string op;
-  int argument;
+    std::string op;
+    int argument;
 };
 
 namespace test_framework {

@@ -3,9 +3,25 @@
 #include "test_framework/generic_test.h"
 using std::string;
 
+string NextNumber(const string &s) {
+    std::string result;
+    for (int i = 0; i < s.size(); i++) {
+        int count = 1;
+        while (i + 1 < s.size() && s[i] == s[i + 1]) {
+            count++;
+            i++;
+        }
+        result += std::to_string(count) + s[i];
+    }
+    return result;
+}
+
 string LookAndSay(int n) {
-  // TODO - you fill in here.
-  return "";
+    string s{"1"};
+    for (int i = 1; i < n; i++) {
+        s = NextNumber(s);
+    }
+    return s;
 }
 
 int main(int argc, char* argv[]) {

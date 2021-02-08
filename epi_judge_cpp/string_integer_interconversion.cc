@@ -18,19 +18,17 @@ std::string IntToString(int x) {
 }
 
 int StringToInt(const string &s) {
-    int sign = s.size() > 0 && s[0] == '-' ? -1 : 1;
-    int i = sign < 0 || s[0] == '+' ? 1 : 0;
     int result = 0;
-    while (i < s.size()) {
+    const bool hasSign = s.size() > 0 && (s[0] == '-' || s[0] == '+');
+    for (int i = hasSign ? 1 : 0; i < s.size(); i++) {
         result *= 10;
         result += s[i] - '0';
-        i++;
     }
-    return result * sign;
+    return s.size() > 0 && s[0] == '-' ? -result : result;
 }
 
 bool isPalindromic(const std::string &s) {
-    for (int i = 0, j = s.size() - 1; i < s.size() - 1, i < j; i++, j--) {
+    for (int i = 0, j = s.size() - 1; i < j; i++, j--) {
         if (s[i] != s[j]) {
             return false;
         }
