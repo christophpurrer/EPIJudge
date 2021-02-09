@@ -9,8 +9,9 @@ using test_framework::BinaryTreeSerializationTrait;
 template <typename T>
 struct BinaryTreeNode {
   T data;
-  unique_ptr<BinaryTreeNode<T>> left, right;
-  BinaryTreeNode<T>* next = nullptr;  // Populates this field.
+  unique_ptr<BinaryTreeNode<T>> right;
+    BinaryTreeNode<int> *left;
+    BinaryTreeNode<T>* next = nullptr;  // Populates this field.
 
   explicit BinaryTreeNode(T data) : data(data){};
 };

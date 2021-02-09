@@ -1,12 +1,29 @@
 #include "binary_tree_with_parent_prototype.h"
 #include "test_framework/binary_tree_utils.h"
 #include "test_framework/generic_test.h"
+BinaryTreeNode<int> *FindSuccessor(
+        const unique_ptr<BinaryTreeNode<int>> &node) {
+    if (!node) return nullptr;
+    auto *iter = node.get();
 
-BinaryTreeNode<int>* FindSuccessor(
-    const unique_ptr<BinaryTreeNode<int>>& node) {
-  // TODO - you fill in here.
-  return nullptr;
+    // 1.) successor in the right sub tree
+    if (iter->right) {
+        iter = iter->right.get();
+        while (iter->left) {
+            iter = iter->left.get();
+        }
+        return iter;
+    }
+
+    // 2.) walk up parents until we aren't a right child anymore
+    while (iter->parent && iter->parent->right.get() == iter) {
+        iter = iter->parent;
+    }
+
+    // 3.) successor is the parent
+    return iter->parent;
 }
+
 int FindSuccessorWrapper(const unique_ptr<BinaryTreeNode<int>>& tree,
                          int node_idx) {
   auto result = FindSuccessor(MustFindNode(tree, node_idx));

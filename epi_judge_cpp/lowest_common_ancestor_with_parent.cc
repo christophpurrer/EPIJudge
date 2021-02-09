@@ -4,11 +4,66 @@
 #include "test_framework/test_failure.h"
 #include "test_framework/timed_executor.h"
 
-BinaryTreeNode<int>* Lca(const unique_ptr<BinaryTreeNode<int>>& node0,
-                         const unique_ptr<BinaryTreeNode<int>>& node1) {
-  // TODO - you fill in here.
-  return nullptr;
+int getDepth(BinaryTreeNode<int> *node) {
+    int depth = 0;
+    while (node) {
+        depth++;
+        node = node->parent;
+    }
+    return depth;
 }
+
+BinaryTreeNode<int> *Lca(const unique_ptr<BinaryTreeNode<int>> &node0,
+                         const unique_ptr<BinaryTreeNode<int>> &node1) {
+    auto *iter0 = node0.get(), *iter1 = node1.get();
+    auto depth0 = getDepth(iter0), depth1 = getDepth(iter1);
+
+    if (depth1 > depth0) {
+        std::swap(iter1, iter0);
+    }
+
+    auto depthDiff = std::abs(depth1 - depth0);
+    while (depthDiff) {
+        iter0 = iter0->parent;
+        depthDiff--;
+    }
+
+    while (iter0 != iter1) {
+        iter0 = iter0->parent;
+        iter1 = iter1->parent;
+    }
+    return iter0;
+}
+
+BinaryTreeNode<int> *LcaSpacious(const unique_ptr<BinaryTreeNode<int>> &node0,
+                         const unique_ptr<BinaryTreeNode<int>> &node1) {
+
+    std::stack<BinaryTreeNode<int> *> node0Path;
+    {
+        auto node0iter = node0.get();
+        while (node0iter) {
+            node0Path.emplace(node0iter);
+            node0iter = node0iter->parent;
+        }
+    }
+    std::stack<BinaryTreeNode<int> *> node1Path;
+    {
+        auto node1iter = node1.get();
+        while (node1iter) {
+            node1Path.emplace(node1iter);
+            node1iter = node1iter->parent;
+        }
+    }
+
+    BinaryTreeNode<int> *result = nullptr;
+    while (!node0Path.empty() && !node1Path.empty() && node0Path.top() == node1Path.top()) {
+        result = node0Path.top();
+        node0Path.pop();
+        node1Path.pop();
+    }
+    return result;
+}
+
 int LcaWrapper(TimedExecutor& executor,
                const unique_ptr<BinaryTreeNode<int>>& tree, int key0,
                int key1) {

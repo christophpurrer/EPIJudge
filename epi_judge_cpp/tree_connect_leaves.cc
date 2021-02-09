@@ -5,14 +5,52 @@
 #include "test_framework/generic_test.h"
 #include "test_framework/test_failure.h"
 #include "test_framework/timed_executor.h"
+
 using std::unique_ptr;
 using std::vector;
 
-vector<const unique_ptr<BinaryTreeNode<int>>*> CreateListOfLeaves(
-    const unique_ptr<BinaryTreeNode<int>>& tree) {
-  // TODO - you fill in here.
-  return {};
+void CreateListOfLeavesHelper(
+        const unique_ptr<BinaryTreeNode<int>> &tree,
+        vector<const unique_ptr<BinaryTreeNode<int>> *> &result) {
+    // Base case
+    if (!tree->left && !tree->right) result.emplace_back(&tree);
+
+    // Recursive case (InOrderTraversal)
+    if (tree->left) {
+        CreateListOfLeavesHelper(tree->left, result);
+    }
+    // visit, no-op
+    if (tree->right) {
+        CreateListOfLeavesHelper(tree->right, result);
+    }
 }
+
+vector<const unique_ptr<BinaryTreeNode<int>> *> CreateListOfLeaves(
+        const unique_ptr<BinaryTreeNode<int>> &tree) {
+    vector<const unique_ptr<BinaryTreeNode<int>> *> result;
+    if (tree)CreateListOfLeavesHelper(tree, result);
+    return result;
+}
+
+vector<const unique_ptr<BinaryTreeNode<int>> *> CreateListOfLeavesIter(
+        const unique_ptr<BinaryTreeNode<int>> &tree) {
+    vector<const unique_ptr<BinaryTreeNode<int>> *> result;
+    // Base case -> no child
+    if (!tree) return result;
+
+    // Base case -> leaf found
+    if (!tree->left && !tree->right) {
+        result.emplace_back(&tree);
+        // Recursive case
+    } else {
+        auto left = CreateListOfLeaves(tree->left);
+        result.insert(result.end(), left.begin(), left.end());
+        auto right = CreateListOfLeaves(tree->right);
+        result.insert(result.end(), right.begin(), right.end());
+    }
+    return result;
+}
+
 vector<int> CreateListOfLeavesWrapper(
     TimedExecutor& executor, const unique_ptr<BinaryTreeNode<int>>& tree) {
   auto result = executor.Run([&] { return CreateListOfLeaves(tree); });

@@ -14,6 +14,36 @@ shared_ptr<PostingListNode> CopyPostingsList(
   // TODO - you fill in here.
   return nullptr;
 }
+
+
+void SetJumpOrderHelper(const std::shared_ptr<PostingListNode> &L, int order) {
+    if (L && L->order == -1) {
+        order++;
+        SetJumpOrderHelper(L->jump, order);
+        SetJumpOrderHelper(L->next, order);
+    }
+}
+
+void SetJumpOrder(const std::shared_ptr<PostingListNode> &L) {
+    SetJumpOrderHelper(L, 0);
+}
+
+void SetJumpOrderIter(const std::shared_ptr<PostingListNode> &L) {
+    std::stack<shared_ptr<PostingListNode>> s;
+    int order = 0;
+    s.emplace(L);
+    while (!s.empty()) {
+        auto cur = s.top();
+        s.pop();
+        if (cur->order != 1) {
+            cur->order = order;
+            order++;
+            s.emplace(cur->next);
+            s.emplace(cur->jump);
+        }
+    }
+}
+
 using PostingListPtr = std::shared_ptr<PostingListNode>;
 
 struct SerializedNode {

@@ -6,7 +6,7 @@
 using std::unique_ptr;
 using std::vector;
 
-vector<int> InorderTraversal(const unique_ptr<BinaryTreeNode<int>>& tree) {
+vector<int> w(const unique_ptr<BinaryTreeNode<int>>& tree) {
   // TODO - you fill in here.
   return {};
 }

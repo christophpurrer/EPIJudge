@@ -1,22 +1,35 @@
 #include "test_framework/generic_test.h"
 #include "test_framework/serialization_traits.h"
 #include "test_framework/test_failure.h"
+
 class Queue {
- public:
-  Queue(size_t capacity) {}
-  void Enqueue(int x) {
-    // TODO - you fill in here.
-    return;
-  }
-  int Dequeue() {
-    // TODO - you fill in here.
-    return 0;
-  }
-  int Size() const {
-    // TODO - you fill in here.
-    return 0;
-  }
+public:
+    Queue(size_t capacity) : entries_(capacity) {}
+
+    void Enqueue(int x) {
+        if(num_queue_elements == entries_.size()) {
+
+        }
+        // TODO - you fill in here.
+        return;
+    }
+
+    int Dequeue() {
+        // TODO - you fill in here.
+        return 0;
+    }
+
+    int Size() const {
+        // TODO - you fill in here.
+        return 0;
+    }
+
+private:
+    const int kScaleFactor = 2;
+    size_t head_ = 0, tail_ = 0, num_queue_elements = 0;
+    std::vector<int> entries_;
 };
+
 struct QueueOp {
   enum class Operation { kConstruct, kDequeue, kEnqueue, kSize } op;
   int argument;

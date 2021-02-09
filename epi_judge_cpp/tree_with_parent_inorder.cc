@@ -4,9 +4,37 @@
 #include "test_framework/generic_test.h"
 using std::vector;
 
-vector<int> InorderTraversal(const unique_ptr<BinaryTreeNode<int>>& tree) {
-  // TODO - you fill in here.
-  return {};
+void InorderTraversalHelper(const unique_ptr<BinaryTreeNode<int>> &tree, vector<int> &result) {
+    if (!tree) return;
+    InorderTraversalHelper(tree->left, result);
+    result.emplace_back(tree->data);
+    InorderTraversalHelper(tree->right, result);
+}
+
+vector<int> InorderTraversalRec(const unique_ptr<BinaryTreeNode<int>> &tree) {
+    vector<int> result;
+    InorderTraversalHelper(tree, result);
+    return result;
+}
+
+void RecLeft(std::stack<BinaryTreeNode<int> *> &stack, BinaryTreeNode<int> *node) {
+    while (node) {
+        stack.emplace(node);
+        node = node->left.get();
+    }
+}
+
+vector<int> InorderTraversal(const unique_ptr<BinaryTreeNode<int>> &tree) {
+    std::stack<BinaryTreeNode<int>*> stack;
+    RecLeft(stack, tree.get());
+    vector<int> result;
+    while(!stack.empty()) {
+        auto value = stack.top();
+        stack.pop();
+        RecLeft(stack, value->right.get());
+        result.emplace_back(value->data);
+    }
+    return result;
 }
 
 int main(int argc, char* argv[]) {

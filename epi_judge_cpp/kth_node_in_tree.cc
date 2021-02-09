@@ -12,15 +12,28 @@ using test_framework::BinaryTreeSerializationTrait;
 template <typename T>
 struct BinaryTreeNode {
   T data;
-  unique_ptr<BinaryTreeNode<T>> left, right;
-  int size;
+  unique_ptr<BinaryTreeNode<T>> right;
+  unique_ptr<BinaryTreeNode<T>> left;
+    int size;
 };
 
-const BinaryTreeNode<int>* FindKthNodeBinaryTree(
-    const unique_ptr<BinaryTreeNode<int>>& tree, int k) {
-  // TODO - you fill in here.
-  return nullptr;
+const BinaryTreeNode<int> *FindKthNodeBinaryTree(
+        const unique_ptr<BinaryTreeNode<int>> &tree, int k) {
+    auto *iter = tree.get();
+    while (iter) {
+        int leftSize = iter->left ? iter->left->size : 0;
+        if (leftSize + 1 < k) { // kth node must be in the right subtree
+            k -= (leftSize + 1);
+            iter = iter->right.get();
+        } else if (leftSize == k - 1) {
+            return iter;
+        } else {
+            iter = iter->left.get();
+        }
+    }
+    return nullptr;
 }
+
 namespace test_framework {
 template <typename KeyT>
 struct SerializationTrait<std::unique_ptr<BinaryTreeNode<KeyT>>>
