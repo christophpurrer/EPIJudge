@@ -1,11 +1,23 @@
 #include <vector>
 
 #include "test_framework/generic_test.h"
+
 using std::vector;
 
-int SearchSmallest(const vector<int>& A) {
-  // TODO - you fill in here.
-  return 0;
+int SearchSmallest(const vector<int> &A) {
+    int left = 0, right = A.size() - 1;
+    while (left < right) {
+        int mid = left + (right - left) / 2;
+        if (A[mid] > A[right]) {
+            // min number is in [mid + 1 : right]
+            left = mid + 1;
+        } else {
+            // min must be in [left : mid]
+            right = mid;
+        }
+    }
+
+    return left;
 }
 
 int main(int argc, char* argv[]) {
