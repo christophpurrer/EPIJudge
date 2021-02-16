@@ -9,16 +9,19 @@ using std::string;
 using std::vector;
 
 struct Name {
-  bool operator<(const Name& that) const {
-    return first_name != that.first_name ? first_name < that.first_name
-                                         : last_name < that.last_name;
-  }
-
-  string first_name, last_name;
+    bool operator<(const Name &rhs) const {
+        return first_name != rhs.first_name ? first_name < rhs.first_name
+                                            : last_name < rhs.last_name;
+    }
+    std::string first_name, last_name;
 };
-void EliminateDuplicate(vector<Name>* names) {
-  // TODO - you fill in here.
-  return;
+
+void EliminateDuplicate(vector<Name> *names) {
+    std::sort(names->begin(), names->end());
+    auto unique = std::unique(names->begin(), names->end(), [](const Name &first, const Name &sec) {
+        return first.first_name == sec.first_name && first.last_name == sec.last_name;
+    });
+    names->erase(unique, names->end());
 }
 
 namespace test_framework {

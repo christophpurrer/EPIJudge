@@ -3,10 +3,25 @@
 #include "test_framework/generic_test.h"
 using std::vector;
 
-vector<int> IntersectTwoSortedArrays(const vector<int>& A,
-                                     const vector<int>& B) {
-  // TODO - you fill in here.
-  return {};
+vector<int> IntersectTwoSortedArrays(const vector<int> &A,
+                                     const vector<int> &B) {
+    std::vector<int> result;
+    auto iterA = A.begin();
+    auto iterB = B.begin();
+    while (iterA != A.end() && iterB != B.end()) {
+        if (*iterA < *iterB) {
+            iterA++;
+        } else if (*iterA == *iterB) {
+            if (result.empty() || result.back() != *iterA) {
+                result.emplace_back(*iterA);
+            }
+            iterA++;
+            iterB++;
+        } else {
+            iterB++;
+        }
+    }
+    return result;
 }
 
 int main(int argc, char* argv[]) {

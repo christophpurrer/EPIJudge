@@ -1,5 +1,6 @@
 #include <string>
 #include <vector>
+#include <unordered_map>
 
 #include "test_framework/generic_test.h"
 #include "test_framework/test_failure.h"
@@ -13,10 +14,35 @@ struct Subarray {
 };
 
 Subarray FindSmallestSequentiallyCoveringSubset(
-    const vector<string>& paragraph, const vector<string>& keywords) {
-  // TODO - you fill in here.
-  return {0, 0};
+        const vector<string> &paragraph, const vector<string> &keywords) {
+    std::unordered_map<string, int> keyword2Index;
+    for (int i = 0; i < keywords.size(); i++) {
+        keyword2Index[keywords[i]] = i;
+    }
+    std::vector<int> latestOccurence(keywords.size(), -1);
+    std::vector<int> shortestSubarraylength(keywords.size(), std::numeric_limits<int>::max());
+    Subarray result = {-1, -1};
+    int shortestDistance = std::numeric_limits<int>::max();
+    for (int i = 0; i < paragraph.size(); i++) {
+        if (keyword2Index.count(paragraph[i])) {
+            int index = keyword2Index[paragraph[i]];
+            if (index == 0) {
+                shortestSubarraylength[index] = 1;
+            } else if (shortestSubarraylength[index - 1] != std::numeric_limits<int>::max()) {
+                int distance = i - latestOccurence[index - 1];
+                shortestSubarraylength[index] = distance + shortestSubarraylength[index - 1];
+            }
+            latestOccurence[index] = i;
+
+            if (index == keywords.size() - 1 && shortestSubarraylength.back() < shortestDistance) {
+                shortestDistance = shortestSubarraylength.back();
+                result = {i - shortestSubarraylength.back() + 1, i};
+            }
+        }
+    }
+    return result;
 }
+
 int FindSmallestSequentiallyCoveringSubsetWrapper(
     TimedExecutor& executor, const vector<string>& paragraph,
     const vector<string>& keywords) {

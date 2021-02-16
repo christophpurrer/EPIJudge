@@ -6,10 +6,18 @@ using std::vector;
 // The numbering starts from one, i.e., if A = [3, 1, -1, 2] then
 // FindKthLargest(1, A) returns 3, FindKthLargest(2, A) returns 2,
 // FindKthLargest(3, A) returns 1, and FindKthLargest(4, A) returns -1.
-int FindKthLargest(int k, vector<int>* A_ptr) {
-  // TODO - you fill in here.
-  return 0;
+int FindKthLargest(int k, vector<int> *A_ptr) {
+    const vector<int> &A = *A_ptr;
+    std::priority_queue<int, vector<int>, std::greater<int> > minHeap;
+    for (const auto a : A) {
+        minHeap.emplace(a);
+        if (minHeap.size() > k) {
+            minHeap.pop();
+        }
+    }
+    return minHeap.top();
 }
+
 int FindKthLargestWrapper(int k, vector<int>& A) {
   return FindKthLargest(k, &A);
 }

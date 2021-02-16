@@ -7,10 +7,16 @@ struct MinMax {
   int smallest, largest;
 };
 
-MinMax FindMinMax(const vector<int>& A) {
-  // TODO - you fill in here.
-  return {0, 0};
+MinMax FindMinMax(const vector<int> &A) {
+    int min = std::numeric_limits<int>::max();
+    int max = std::numeric_limits<int>::min();
+    for (const auto a : A) {
+        min = std::min(min, a);
+        max = std::max(max, a);
+    }
+    return {min, max};
 }
+
 namespace test_framework {
 template <>
 struct SerializationTrait<MinMax> : UserSerTrait<MinMax, int, int> {};

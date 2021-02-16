@@ -1,20 +1,21 @@
 #include <vector>
+#include <unordered_map>
 
 #include "test_framework/generic_test.h"
 using std::vector;
 
 int LongestSubarrayWithDistinctEntries(const vector<int> &A) {
-    int maxSubArray = 1;
-    int curSubArray = 1;
-    for (int i = 1; i < A.size(); i++) {
-        if (A[i] == A[i - 1]) {
-            curSubArray++;
-            maxSubArray = std::max(maxSubArray, curSubArray);
-        } else {
-            curSubArray = 1;
+    std::unordered_map<int, int> pos;
+    int result = 0;
+    for (int left = 0, right = 0; right < A.size(); right++) {
+        pos[A[right]]++;
+        while (pos[A[right]] > 1) {
+            pos[A[left]]--;
+            left++;
         }
+        result = std::max(result, right - left + 1);
     }
-    return maxSubArray;
+    return result;
 }
 
 int main(int argc, char* argv[]) {

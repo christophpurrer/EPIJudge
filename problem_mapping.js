@@ -1356,7 +1356,7 @@ problem_mapping = {
         },
         "11.05 Compute the real square root": {
             "C++: real_square_root.cc": {
-                "passed": 0,
+                "passed": 11003,
                 "total": 11003
             },
             "Java: RealSquareRoot.java": {
@@ -1384,7 +1384,7 @@ problem_mapping = {
         },
         "11.07 Find the min and max simultaneously": {
             "C++: search_for_min_max_in_array.cc": {
-                "passed": 0,
+                "passed": 501,
                 "total": 501
             },
             "Java: SearchForMinMaxInArray.java": {
@@ -1398,7 +1398,7 @@ problem_mapping = {
         },
         "11.08 Find the kth largest element": {
             "C++: kth_largest_in_array.cc": {
-                "passed": 0,
+                "passed": 503,
                 "total": 503
             },
             "Java: KthLargestInArray.java": {
@@ -1442,7 +1442,7 @@ problem_mapping = {
     "Chapter 12: Hash Tables": {
         "12.00 Bootcamp: Hash Tables": {
             "C++: anagrams.cc": {
-                "passed": 0,
+                "passed": 9,
                 "total": 9
             },
             "Java: Anagrams.java": {
@@ -1456,7 +1456,7 @@ problem_mapping = {
         },
         "12.01 Test for palindromic permutations": {
             "C++: is_string_permutable_to_palindrome.cc": {
-                "passed": 0,
+                "passed": 305,
                 "total": 305
             },
             "Java: IsStringPermutableToPalindrome.java": {
@@ -1470,7 +1470,7 @@ problem_mapping = {
         },
         "12.02 Is an anonymous letter constructible?": {
             "C++: is_anonymous_letter_constructible.cc": {
-                "passed": 0,
+                "passed": 212,
                 "total": 212
             },
             "Java: IsAnonymousLetterConstructible.java": {
@@ -1484,7 +1484,7 @@ problem_mapping = {
         },
         "12.03 Implement an ISBN cache": {
             "C++: lru_cache.cc": {
-                "passed": 0,
+                "passed": 101,
                 "total": 101
             },
             "Java: LruCache.java": {
@@ -1498,7 +1498,7 @@ problem_mapping = {
         },
         "12.04 Compute the LCA, optimizing for close ancestors": {
             "C++: lowest_common_ancestor_close_ancestor.cc": {
-                "passed": 0,
+                "passed": 948,
                 "total": 948
             },
             "Java: LowestCommonAncestorCloseAncestor.java": {
@@ -1512,7 +1512,7 @@ problem_mapping = {
         },
         "12.05 Find the nearest repeated entries in an array": {
             "C++: nearest_repeated_entries.cc": {
-                "passed": 0,
+                "passed": 505,
                 "total": 505
             },
             "Java: NearestRepeatedEntries.java": {
@@ -1526,7 +1526,7 @@ problem_mapping = {
         },
         "12.06 Find the smallest subarray covering all values": {
             "C++: smallest_subarray_covering_set.cc": {
-                "passed": 0,
+                "passed": 904,
                 "total": 904
             },
             "Java: SmallestSubarrayCoveringSet.java": {
@@ -1540,7 +1540,7 @@ problem_mapping = {
         },
         "12.07 Find smallest subarray sequentially covering all values": {
             "C++: smallest_subarray_covering_all_values.cc": {
-                "passed": 0,
+                "passed": 629,
                 "total": 629
             },
             "Java: SmallestSubarrayCoveringAllValues.java": {
@@ -1554,7 +1554,7 @@ problem_mapping = {
         },
         "12.08 Find the longest subarray with distinct entries": {
             "C++: longest_subarray_with_distinct_values.cc": {
-                "passed": 0,
+                "passed": 987,
                 "total": 987
             },
             "Java: LongestSubarrayWithDistinctValues.java": {
@@ -1568,7 +1568,7 @@ problem_mapping = {
         },
         "12.09 Find the length of a longest contained interval": {
             "C++: longest_contained_interval.cc": {
-                "passed": 0,
+                "passed": 203,
                 "total": 203
             },
             "Java: LongestContainedInterval.java": {
@@ -1582,7 +1582,7 @@ problem_mapping = {
         },
         "12.10 Compute all string decompositions": {
             "C++: string_decompositions_into_dictionary_words.cc": {
-                "passed": 0,
+                "passed": 171,
                 "total": 171
             },
             "Java: StringDecompositionsIntoDictionaryWords.java": {
@@ -1612,7 +1612,7 @@ problem_mapping = {
     "Chapter 13: Sorting": {
         "13.01 Compute the intersection of two sorted arrays": {
             "C++: intersect_sorted_arrays.cc": {
-                "passed": 0,
+                "passed": 202,
                 "total": 202
             },
             "Java: IntersectSortedArrays.java": {
@@ -1626,7 +1626,7 @@ problem_mapping = {
         },
         "13.02 Merge two sorted arrays": {
             "C++: two_sorted_arrays_merge.cc": {
-                "passed": 0,
+                "passed": 201,
                 "total": 201
             },
             "Java: TwoSortedArraysMerge.java": {
@@ -1654,7 +1654,7 @@ problem_mapping = {
         },
         "13.04 Remove first-name duplicates": {
             "C++: remove_duplicates.cc": {
-                "passed": 0,
+                "passed": 202,
                 "total": 202
             },
             "Java: RemoveDuplicates.java": {

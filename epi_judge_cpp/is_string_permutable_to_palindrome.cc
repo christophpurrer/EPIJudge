@@ -1,11 +1,19 @@
 #include <string>
 
 #include "test_framework/generic_test.h"
+
 using std::string;
 
-bool CanFormPalindrome(const string& s) {
-  // TODO - you fill in here.
-  return true;
+bool CanFormPalindrome(const string &s) {
+    std::unordered_set<char> set;
+    for (const auto &c: s) {
+        if (set.find(c) != set.end()) {
+            set.erase(c);
+        } else {
+            set.insert(c);
+        }
+    }
+    return set.size() <= 1;
 }
 
 int main(int argc, char* argv[]) {

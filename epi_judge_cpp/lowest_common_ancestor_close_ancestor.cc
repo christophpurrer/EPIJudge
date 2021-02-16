@@ -7,10 +7,22 @@
 #include "test_framework/timed_executor.h"
 using std::unique_ptr;
 
-BinaryTreeNode<int>* Lca(const unique_ptr<BinaryTreeNode<int>>& node0,
-                         const unique_ptr<BinaryTreeNode<int>>& node1) {
-  // TODO - you fill in here.
-  return nullptr;
+BinaryTreeNode<int> *Lca(const unique_ptr<BinaryTreeNode<int>> &node0,
+                         const unique_ptr<BinaryTreeNode<int>> &node1) {
+    auto *iter0 = node0.get(), *iter1 = node1.get();
+    std::unordered_set<const BinaryTreeNode<int> *> pathsToRoot;
+    while (iter0 || iter1) {
+        if (iter0) {
+            if (!pathsToRoot.emplace(iter0).second) return iter0;
+            iter0 = iter0->parent;
+        }
+        if (iter1) {
+            if (!pathsToRoot.emplace(iter1).second) return iter1;
+            iter1 = iter1->parent;
+        }
+    }
+
+    throw std::invalid_argument("node0 and node1 are not in the same tree");
 }
 int LcaWrapper(TimedExecutor& executor,
                const unique_ptr<BinaryTreeNode<int>>& tree, int key0,

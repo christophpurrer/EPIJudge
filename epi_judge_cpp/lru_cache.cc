@@ -1,25 +1,63 @@
 #include <vector>
+#include <unordered_map>
+#include <list>
 
 #include "test_framework/generic_test.h"
 #include "test_framework/serialization_traits.h"
 #include "test_framework/test_failure.h"
 
 class LruCache {
- public:
-  LruCache(size_t capacity) {}
-  int Lookup(int isbn) {
-    // TODO - you fill in here.
-    return 0;
-  }
-  void Insert(int isbn, int price) {
-    // TODO - you fill in here.
-    return;
-  }
-  bool Erase(int isbn) {
-    // TODO - you fill in here.
-    return true;
-  }
+public:
+    LruCache(size_t capacity) : capacity_(capacity) {}
+
+    int Lookup(int isbn) {
+        auto it = isbnPrice.find(isbn);
+        if (it != isbnPrice.end()) {
+            // already exist
+            MoveToFront(isbn, it);
+            return it->second.second;
+        }
+        return -1;
+    }
+
+    void Insert(int isbn, int price) {
+        auto it = isbnPrice.find(isbn);
+        if (it != isbnPrice.end()) {
+            // already exist
+            MoveToFront(isbn, it);
+        } else {
+            if (isbnPrice.size() == capacity_) {
+                isbnPrice.erase(lruQueue.back());
+                lruQueue.pop_back();
+            }
+            lruQueue.emplace_front(isbn);
+            isbnPrice[isbn] = {lruQueue.begin(), price};
+        }
+    }
+
+    bool Erase(int isbn) {
+        auto it = isbnPrice.find(isbn);
+        if (it == isbnPrice.end()) return false;
+
+        lruQueue.erase(it->second.first);
+        isbnPrice.erase(isbn);
+        return true;
+    }
+
+private:
+    typedef std::unordered_map<int, std::pair<std::list<int>::iterator, int>> Table;
+
+    void MoveToFront(int isbn, const Table::iterator &it) {
+        lruQueue.erase(it->second.first);
+        lruQueue.emplace_front(isbn);
+        it->second.first = lruQueue.begin();
+    }
+
+    size_t capacity_;
+    Table isbnPrice;
+    std::list<int> lruQueue;
 };
+
 struct Op {
   std::string code;
   int arg1;
