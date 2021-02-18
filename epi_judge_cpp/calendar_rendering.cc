@@ -5,11 +5,36 @@
 using std::vector;
 
 struct Event {
-  int start, finish;
+    int start, finish;
 };
-int FindMaxSimultaneousEvents(const vector<Event>& A) {
-  // TODO - you fill in here.
-  return 0;
+
+struct Endpoint {
+    bool operator<(const Endpoint &other) const {
+        return time != other.time ? time < other.time : (isStart && !other.isStart);
+    }
+
+    int time;
+    bool isStart;
+};
+
+int FindMaxSimultaneousEvents(const vector<Event> &A) {
+    vector<Endpoint> E;
+    for (const auto &event : A) {
+        E.emplace_back(Endpoint{event.start, true});
+        E.emplace_back(Endpoint{event.finish, false});
+    }
+    std::sort(E.begin(), E.end());
+
+    int maxSimultaneousEvents = 0, numSimultaneousEvents = 0;
+    for (const auto &endpoint : E) {
+        if (endpoint.isStart) {
+            numSimultaneousEvents++;
+            maxSimultaneousEvents = std::max(maxSimultaneousEvents, numSimultaneousEvents);
+        } else {
+            numSimultaneousEvents--;
+        }
+    }
+    return maxSimultaneousEvents;
 }
 namespace test_framework {
 template <>

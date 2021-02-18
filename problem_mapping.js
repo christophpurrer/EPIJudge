@@ -1682,7 +1682,7 @@ problem_mapping = {
         },
         "13.06 Render a calendar": {
             "C++: calendar_rendering.cc": {
-                "passed": 0,
+                "passed": 97,
                 "total": 97
             },
             "Java: CalendarRendering.java": {
@@ -1696,7 +1696,7 @@ problem_mapping = {
         },
         "13.07 Merging intervals": {
             "C++: interval_add.cc": {
-                "passed": 0,
+                "passed": 103,
                 "total": 103
             },
             "Java: IntervalAdd.java": {
@@ -1738,7 +1738,7 @@ problem_mapping = {
         },
         "13.10 Team photo day---1": {
             "C++: is_array_dominated.cc": {
-                "passed": 0,
+                "passed": 1,
                 "total": 105
             },
             "Java: IsArrayDominated.java": {
@@ -1796,7 +1796,7 @@ problem_mapping = {
         },
         "14.01 Test if a binary tree satisfies the BST property": {
             "C++: is_tree_a_bst.cc": {
-                "passed": 0,
+                "passed": 6,
                 "total": 3139
             },
             "Java: IsTreeABst.java": {

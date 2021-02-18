@@ -15,8 +15,19 @@ struct Interval {
 };
 
 vector<Interval> UnionOfIntervals(vector<Interval> intervals) {
-  // TODO - you fill in here.
-  return {};
+  std::vector<Interval> result;
+
+  int left = -1;
+  int right = -1;
+  for(const auto& interval: intervals) {
+
+      if(left != -1 && right != -1) {
+          result.emplace_back(Interval{left, right});
+      }
+  }
+
+
+  return result;
 }
 struct FlatInterval {
   int left_val;

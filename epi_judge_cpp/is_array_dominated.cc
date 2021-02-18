@@ -8,24 +8,38 @@
 using std::vector;
 
 class Team {
- public:
-  explicit Team(const vector<int>& height) {
-    transform(begin(height), end(height), back_inserter(players_),
-              [](int h) { return Player{h}; });
-  }
-  // Checks if team0 can be placed in front of team1.
-  static bool ValidPlacementExists(const Team& team0, const Team& team1) {
-    // TODO - you fill in here.
-    return true;
-  }
+public:
+    explicit Team(const vector<int> &height) {
+        transform(begin(height), end(height), back_inserter(players_),
+                  [](int h) { return Player{h}; });
+    }
 
- private:
-  struct Player {
-    bool operator<(const Player& that) const { return height < that.height; }
+    // Checks if team0 can be placed in front of team1.
+    static bool ValidPlacementExists(const Team &team0, const Team &team1) {
+        std::vector<Player> teamOSorted(team0.sortPlayersByHeight());
+        std::vector<Player> team1Sorted(team0.sortPlayersByHeight());
+        for (int i = 0; i < teamOSorted.size() && i < team1Sorted.size(); i++) {
+            if (!(teamOSorted[i] < team1Sorted[i])) {
+                return false;
+            }
+        }
+        return true;
+    }
 
-    int height;
-  };
-  vector<Player> players_;
+private:
+    struct Player {
+        bool operator<(const Player &that) const { return height < that.height; }
+
+        int height;
+    };
+
+    std::vector<Player> sortPlayersByHeight() const {
+        std::vector<Player> result(players_);
+        std::sort(result.begin(), result.end());
+        return result;
+    }
+
+    vector<Player> players_;
 };
 void ValidPlacementExistsWrapper(TimedExecutor& executor,
                                  const vector<int>& team0,
