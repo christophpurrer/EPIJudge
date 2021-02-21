@@ -9,12 +9,29 @@ using std::unique_ptr;
 
 // Input nodes are nonempty and the key at s is less than or equal to that at
 // b.
-BstNode<int>* FindLca(const unique_ptr<BstNode<int>>& tree,
-                      const unique_ptr<BstNode<int>>& s,
-                      const unique_ptr<BstNode<int>>& b) {
-  // TODO - you fill in here.
-  return nullptr;
+bool isGreater(const BstNode<int> *node,
+               const unique_ptr<BstNode<int>> &s,
+               const unique_ptr<BstNode<int>> &b) {
+    return node->data > s->data && node->data > b->data;
 }
+
+bool isSmaller(const BstNode<int> *node,
+               const unique_ptr<BstNode<int>> &s,
+               const unique_ptr<BstNode<int>> &b) {
+    return node->data < s->data && node->data < b->data;
+}
+
+BstNode<int> *FindLca(const unique_ptr<BstNode<int>> &tree,
+                      const unique_ptr<BstNode<int>> &s,
+                      const unique_ptr<BstNode<int>> &b) {
+    auto result = tree.get();
+    while (isGreater(result, s, b) || isSmaller(result, s, b)) {
+        if (isGreater(result, s, b)) result = result->left.get();
+        if (isSmaller(result, s, b)) result = result->right.get();
+    }
+    return result;
+}
+
 int LcaWrapper(TimedExecutor& executor,
                const std::unique_ptr<BstNode<int>>& tree, int key0, int key1) {
   const unique_ptr<BstNode<int>>& node0 = MustFindNode(tree, key0);

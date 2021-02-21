@@ -11,13 +11,28 @@ struct Interval {
   int left, right;
 };
 
-vector<int> RangeLookupInBST(const unique_ptr<BstNode<int>>& tree,
-                             const Interval& interval) {
-  // TODO - you fill in here.
-  return {};
+void RangeLookupInBSTHelper(BstNode<int> *tree,
+                            const Interval &interval, vector<int> &result) {
+    if (!tree) return;
+    if (tree->data >= interval.left && tree->data <= interval.right) {
+        result.emplace_back(tree->data);
+    }
+    if (tree->data >= interval.left) {
+        RangeLookupInBSTHelper(tree->left.get(), interval, result);
+    }
+    if (tree->data <= interval.right) {
+        RangeLookupInBSTHelper(tree->right.get(), interval, result);
+    }
 }
-void RangeLookupInBSTHelper(const unique_ptr<BstNode<int>>& tree,
-                            const Interval& interval, vector<int>* result) {}
+
+
+vector<int> RangeLookupInBST(const unique_ptr<BstNode<int>> &tree,
+                             const Interval &interval) {
+    std::vector<int> result;
+    RangeLookupInBSTHelper(tree.get(), interval, result);
+    std::sort(result.begin(), result.end());
+    return result;
+}
 
 namespace test_framework {
 template <>

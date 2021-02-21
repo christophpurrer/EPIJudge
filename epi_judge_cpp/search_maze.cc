@@ -15,10 +15,93 @@ struct Coordinate {
 
   int x, y;
 };
-vector<Coordinate> SearchMaze(vector<vector<Color>> maze, const Coordinate& s,
-                              const Coordinate& e) {
-  // TODO - you fill in here.
-  return {};
+
+bool isFeasible(const Coordinate &cur, vector<vector<Color>> &maze) {
+    return cur.x >= 0 && cur.x < maze.size() && cur.y >= 0 && cur.y < maze[cur.x].size() &&
+           maze[cur.x][cur.y] == Color::kWhite;
+}
+
+void SearchMazeHelperWorking(vector<vector<Color>> &maze, const Coordinate &s,
+                      const Coordinate &e, std::vector<Coordinate> partial, std::vector<Coordinate> &result) {
+
+    // Base case
+    // Found (a better) solution
+    partial.emplace_back(s);
+    if (s == e && (result.empty() || partial.size() < result.size())) {
+        result = partial;
+        return;
+    }
+
+    // Recursive case(s)
+    // Can go up?
+    {
+        Coordinate up{s.x, s.y + 1};
+        if (isFeasible(up, maze)) {
+            maze[up.x][up.y] = Color::kBlack;
+            SearchMazeHelperWorking(maze, up, e, partial, result);
+        }
+    }
+
+    // Can go down?
+    {
+        Coordinate down{s.x, s.y - 1};
+        if (isFeasible(down, maze)) {
+            maze[down.x][down.y] = Color::kBlack;
+            SearchMazeHelperWorking(maze, down, e, partial, result);
+        }
+    }
+
+    // Can go right?
+    {
+        Coordinate right{s.x + 1, s.y};
+        if (isFeasible(right, maze)) {
+            maze[right.x][right.y] = Color::kBlack;
+            SearchMazeHelperWorking(maze, right, e, partial, result);
+        }
+    }
+
+    // Can go left?
+    {
+        Coordinate left{s.x - 1, s.y};
+        if (isFeasible(left, maze)) {
+            maze[left.x][left.y] = Color::kBlack;
+            SearchMazeHelperWorking(maze, left, e, partial, result);
+        }
+    }
+}
+
+void SearchMazeHelper(vector<vector<Color>> &maze, const Coordinate &s,
+                      const Coordinate &e, std::vector<Coordinate> partial, std::vector<Coordinate> &result) {
+
+
+    // Enqueue current field and mark as visited
+    maze[s.x][s.y] = Color::kBlack;
+    partial.emplace_back(s);
+    // Base case
+    // Found (a better) solution
+    if (s == e && (result.empty() || partial.size() < result.size())) {
+        result = partial;
+        return;
+    }
+
+    // Recursive case(s)
+    // Can go up/down/left/right?
+    const std::array<std::pair<int, int>, 4> steps = {{{0, 1}, {1, 0}, {0, -1}, {-1, 0}}};
+    for (auto step: steps) {
+        Coordinate next{s.x + step.first, s.y + step.second};
+        if (isFeasible(next, maze)) {
+            SearchMazeHelperWorking(maze, next,
+                                    e, partial, result);
+        }
+    }
+}
+
+vector<Coordinate> SearchMaze(vector<vector<Color>>& maze, const Coordinate &s,
+                              const Coordinate &e) {
+    std::vector<Coordinate> partial;
+    std::vector<Coordinate> result;
+    SearchMazeHelper(maze, s, e, partial, result);
+    return result;
 }
 
 namespace test_framework {

@@ -1810,7 +1810,7 @@ problem_mapping = {
         },
         "14.02 Find the first key greater than a given value in a BST": {
             "C++: search_first_greater_value_in_bst.cc": {
-                "passed": 0,
+                "passed": 949,
                 "total": 949
             },
             "Java: SearchFirstGreaterValueInBst.java": {
@@ -1824,7 +1824,7 @@ problem_mapping = {
         },
         "14.03 Find the k largest elements in a BST": {
             "C++: k_largest_values_in_bst.cc": {
-                "passed": 0,
+                "passed": 949,
                 "total": 949
             },
             "Java: KLargestValuesInBst.java": {
@@ -1838,7 +1838,7 @@ problem_mapping = {
         },
         "14.04 Compute the LCA in a BST": {
             "C++: lowest_common_ancestor_in_bst.cc": {
-                "passed": 0,
+                "passed": 951,
                 "total": 951
             },
             "Java: LowestCommonAncestorInBst.java": {
@@ -1852,7 +1852,7 @@ problem_mapping = {
         },
         "14.05 Reconstruct a BST from traversal data": {
             "C++: bst_from_preorder.cc": {
-                "passed": 0,
+                "passed": 950,
                 "total": 950
             },
             "Java: BstFromPreorder.java": {
@@ -1894,7 +1894,7 @@ problem_mapping = {
         },
         "14.08 Build a minimum height BST from a sorted array": {
             "C++: bst_from_sorted_array.cc": {
-                "passed": 0,
+                "passed": 87,
                 "total": 87
             },
             "Java: BstFromSortedArray.java": {
@@ -1922,7 +1922,7 @@ problem_mapping = {
         },
         "14.10 The range lookup problem": {
             "C++: range_lookup_in_bst.cc": {
-                "passed": 0,
+                "passed": 954,
                 "total": 954
             },
             "Java: RangeLookupInBst.java": {
@@ -1994,7 +1994,7 @@ problem_mapping = {
         },
         "15.03 Generate all nonattacking placements of n-Queens": {
             "C++: n_queens.cc": {
-                "passed": 0,
+                "passed": 10,
                 "total": 10
             },
             "Java: NQueens.java": {
@@ -2008,7 +2008,7 @@ problem_mapping = {
         },
         "15.04 Generate permutations": {
             "C++: permutations.cc": {
-                "passed": 0,
+                "passed": 8,
                 "total": 8
             },
             "Java: Permutations.java": {
@@ -2022,7 +2022,7 @@ problem_mapping = {
         },
         "15.05 Generate the power set": {
             "C++: power_set.cc": {
-                "passed": 0,
+                "passed": 15,
                 "total": 15
             },
             "Java: PowerSet.java": {
@@ -2036,7 +2036,7 @@ problem_mapping = {
         },
         "15.06 Generate all subsets of size k": {
             "C++: combinations.cc": {
-                "passed": 0,
+                "passed": 120,
                 "total": 120
             },
             "Java: Combinations.java": {
@@ -2050,7 +2050,7 @@ problem_mapping = {
         },
         "15.07 Generate strings of matched parens": {
             "C++: enumerate_balanced_parentheses.cc": {
-                "passed": 0,
+                "passed": 11,
                 "total": 11
             },
             "Java: EnumerateBalancedParentheses.java": {
@@ -2064,7 +2064,7 @@ problem_mapping = {
         },
         "15.08 Generate palindromic decompositions": {
             "C++: enumerate_palindromic_decompositions.cc": {
-                "passed": 0,
+                "passed": 522,
                 "total": 522
             },
             "Java: EnumeratePalindromicDecompositions.java": {
@@ -2458,7 +2458,7 @@ problem_mapping = {
     "Chapter 18: Graphs": {
         "18.01 Search a maze": {
             "C++: search_maze.cc": {
-                "passed": 0,
+                "passed": 101,
                 "total": 101
             },
             "Java: SearchMaze.java": {
