@@ -7,9 +7,48 @@
 using std::string;
 using std::vector;
 
-void FillSurroundedRegions(vector<vector<char>>* board_ptr) {
-  // TODO - you fill in here.
-  return;
+void FillSurroundedRegions(vector<vector<char>> *board_ptr) {
+    vector<vector<char>> &board = *board_ptr;
+    // Take all 'W' at the border and enqueue them
+    std::queue<std::pair<int, int>> q;
+    for (int x = 0; x < board.size(); x++) {
+        if (board[x][0] == 'W') {
+            q.emplace(std::pair<int, int>{x, 0});
+        }
+        if (board[x][board[x].size() - 1] == 'W') {
+            q.emplace(std::pair<int, int>{x, board[x].size() - 1});
+        }
+    }
+    for (int y = 0; y < board[0].size(); y++) {
+        if (board[0][y] == 'W') {
+            q.emplace(std::pair<int, int>{0, y});
+        }
+        if (board[board.size() - 1][y] == 'W') {
+            q.emplace(std::pair<int, int>{board.size() - 1, y});
+        }
+    }
+
+    // Mark them 'G' (or any other other all)
+    const std::array<std::pair<int, int>, 4> dirs = {{{0, 1}, {1, 0}, {-1, 0}, {0, -1}}};
+    while (!q.empty()) {
+        auto val = q.front();
+        q.pop();
+        board[val.first][val.second] = 'G';
+        for (auto dir: dirs) {
+            auto next = std::pair<int, int>{val.first + dir.first, val.second + dir.second};
+            if (next.first >= 0 && next.second >= 0 && next.first < board.size() &&
+                next.second < board[next.first].size() && board[next.first][next.second] == 'W') {
+                q.emplace(next);
+            }
+        }
+    }
+
+    // Now mark all 'G' as 'W' and the rest 'B'
+    for (auto &row: board) {
+        for (auto &col : row) {
+            col = col == 'G' ? 'W' : 'B';
+        }
+    }
 }
 vector<vector<string>> FillSurroundedRegionsWrapper(
     TimedExecutor& executor, vector<vector<string>> board) {

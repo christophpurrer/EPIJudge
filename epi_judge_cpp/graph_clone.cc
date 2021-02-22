@@ -1,6 +1,7 @@
 #include <algorithm>
 #include <queue>
 #include <unordered_set>
+#include <unordered_map>
 #include <vector>
 
 #include "test_framework/generic_test.h"
@@ -15,10 +16,32 @@ struct GraphVertex {
   vector<GraphVertex*> edges;
 };
 
-GraphVertex* CloneGraph(GraphVertex* graph) {
-  // TODO - you fill in here.
-  return new GraphVertex{0};
+void CloneGraphHelper(GraphVertex &original, GraphVertex &clone,
+                      std::unordered_map<GraphVertex *, GraphVertex *> &originalToClone) {
+    // Base case:
+    clone.label = original.label;
+    originalToClone[&original] = &clone;
+
+    // Recursive cases
+    for (auto child: original.edges) {
+        auto it = originalToClone.find(child);
+        if (it != originalToClone.end()) {
+            clone.edges.emplace_back(it->second);
+        } else {
+            auto childClone = new GraphVertex;
+            clone.edges.emplace_back(childClone);
+            CloneGraphHelper(*child, *childClone, originalToClone);
+        }
+    }
 }
+
+GraphVertex *CloneGraph(GraphVertex *graph) {
+    auto result = new GraphVertex;
+    std::unordered_map<GraphVertex *, GraphVertex *> originalToClone;
+    CloneGraphHelper(*graph, *result, originalToClone);
+    return result;
+}
+
 vector<int> CopyLabels(const vector<GraphVertex*>& edges) {
   vector<int> labels;
   transform(begin(edges), end(edges), back_inserter(labels),

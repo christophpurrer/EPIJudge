@@ -7,16 +7,33 @@
 using std::vector;
 
 struct GraphVertex {
-  vector<GraphVertex*> edges;
+    vector<GraphVertex *> edges;
+    enum Color {
+        white, gray, black
+    } color = white;
 };
 
-bool IsDeadlocked(vector<GraphVertex>* graph) {
-  // TODO - you fill in here.
-  return true;
+bool HasCycle(GraphVertex &cur) {
+    if (cur.color == GraphVertex::gray) return true;
+
+    cur.color = GraphVertex::gray;
+    for (auto next : cur.edges) {
+        if (next->color != GraphVertex::black && HasCycle(*next)) return true;
+    }
+
+    cur.color = GraphVertex::black;
+    return false;
 }
+
+bool IsDeadlocked(vector<GraphVertex> *graph_ptr) {
+    vector<GraphVertex> &graph = *graph_ptr;
+    return std::any_of(graph.begin(), graph.end(),
+                       [](GraphVertex &v) { return v.color == GraphVertex::white && HasCycle(v); });
+}
+
 struct Edge {
-  int from;
-  int to;
+    int from;
+    int to;
 };
 
 namespace test_framework {
